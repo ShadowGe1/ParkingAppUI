@@ -29,13 +29,10 @@ public class FirstPageActivity extends AppCompatActivity {
 
         createAccount = findViewById(R.id.createAccount);
 
-        createAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(FirstPageActivity.this, SignUpActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        createAccount.setOnClickListener(v -> {
+            Intent intent = new Intent(FirstPageActivity.this, SignUpActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 
@@ -44,4 +41,6 @@ public class FirstPageActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+
 }

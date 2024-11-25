@@ -13,14 +13,14 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginTop="150dp"
-      android:minWidth="250dp"
+      android:autofillHints=""
       android:background="@drawable/rounded_text_field"
       android:drawablePadding="8dp"
       android:ems="10"
       android:fontFamily="@font/abril_fatface"
-      android:autofillHints=""
       android:hint="@string/prompt_username"
       android:inputType="text"
+      android:minWidth="250dp"
       android:textColor="@color/black"
       android:textColorHint="#792D9B"
       android:textSize="14sp"
@@ -172,5 +172,14 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/register_again_password" />
+
+  <ImageView
+      android:id="@+id/x_icon"
+      android:layout_width="14dp"
+      android:layout_height="16dp"
+      app:layout_constraintVertical_bias="1.0"
+      app:srcCompat="@android:drawable/ic_delete"
+      android:visibility="gone"
+      tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

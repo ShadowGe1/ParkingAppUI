@@ -10,8 +10,8 @@
     <!-- Email Field -->
     <EditText
         android:id="@+id/email_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_marginTop="372dp"
         android:autofillHints="email"
         android:background="@drawable/rounded_text_field"
@@ -31,8 +31,8 @@
     <!-- Password Field -->
     <EditText
         android:id="@+id/password_prompt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
         android:layout_marginTop="20dp"
         android:autofillHints="password"
         android:background="@drawable/rounded_text_field"
