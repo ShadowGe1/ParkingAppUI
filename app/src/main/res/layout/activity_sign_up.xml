@@ -174,12 +174,112 @@
       app:layout_constraintTop_toBottomOf="@+id/register_again_password" />
 
   <ImageView
-      android:id="@+id/x_icon"
+      android:id="@+id/x_icon_username"
       android:layout_width="14dp"
       android:layout_height="16dp"
-      app:layout_constraintVertical_bias="1.0"
-      app:srcCompat="@android:drawable/ic_delete"
+      android:layout_marginEnd="10dp"
+      android:contentDescription="@string/invalid_prompt"
       android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/register_username"
+      app:layout_constraintEnd_toEndOf="@+id/register_username"
+      app:layout_constraintTop_toTopOf="@+id/register_username"
+      app:layout_constraintVertical_bias="0.5"
+      app:srcCompat="@android:drawable/ic_delete"
       tools:ignore="MissingConstraints" />
+
+  <ImageView
+      android:id="@+id/x_icon_name"
+      android:layout_width="14dp"
+      android:layout_height="16dp"
+      android:layout_marginEnd="10dp"
+      android:contentDescription="@string/invalid_prompt"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/register_name"
+      app:layout_constraintEnd_toEndOf="@+id/register_name"
+      app:layout_constraintTop_toTopOf="@+id/register_name"
+      app:layout_constraintVertical_bias="0.5"
+      app:srcCompat="@android:drawable/ic_delete"
+      tools:ignore="MissingConstraints" />
+
+  <ImageView
+      android:id="@+id/x_icon_surname"
+      android:layout_width="14dp"
+      android:layout_height="16dp"
+      android:layout_marginEnd="10dp"
+      android:contentDescription="@string/invalid_prompt"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/register_surname"
+      app:layout_constraintEnd_toEndOf="@+id/register_surname"
+      app:layout_constraintTop_toTopOf="@+id/register_surname"
+      app:layout_constraintVertical_bias="0.5"
+      app:srcCompat="@android:drawable/ic_delete"
+      tools:ignore="MissingConstraints" />
+
+  <ImageView
+      android:id="@+id/x_icon_email"
+      android:layout_width="14dp"
+      android:layout_height="16dp"
+      android:layout_marginEnd="10dp"
+      android:contentDescription="@string/invalid_prompt"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/register_email"
+      app:layout_constraintEnd_toEndOf="@+id/register_email"
+      app:layout_constraintTop_toTopOf="@+id/register_email"
+      app:layout_constraintVertical_bias="0.5"
+      app:srcCompat="@android:drawable/ic_delete"
+      tools:ignore="MissingConstraints" />
+
+  <ImageView
+      android:id="@+id/x_icon_phone"
+      android:layout_width="14dp"
+      android:layout_height="16dp"
+      android:layout_marginEnd="10dp"
+      android:contentDescription="@string/invalid_prompt"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/register_phone"
+      app:layout_constraintEnd_toEndOf="@+id/register_phone"
+      app:layout_constraintTop_toTopOf="@+id/register_phone"
+      app:layout_constraintVertical_bias="0.5"
+      app:srcCompat="@android:drawable/ic_delete"
+      tools:ignore="MissingConstraints" />
+
+  <ImageView
+      android:id="@+id/x_icon_password"
+      android:layout_width="14dp"
+      android:layout_height="16dp"
+      android:layout_marginEnd="10dp"
+      android:contentDescription="@string/invalid_prompt"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/register_password"
+      app:layout_constraintEnd_toEndOf="@+id/register_password"
+      app:layout_constraintTop_toTopOf="@+id/register_password"
+      app:layout_constraintVertical_bias="0.5"
+      app:srcCompat="@android:drawable/ic_delete"
+      tools:ignore="MissingConstraints" />
+
+  <ImageView
+      android:id="@+id/x_icon_againPassword"
+      android:layout_width="14dp"
+      android:layout_height="16dp"
+      android:layout_marginEnd="10dp"
+      android:contentDescription="@string/invalid_prompt"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="@+id/register_again_password"
+      app:layout_constraintEnd_toEndOf="@+id/register_again_password"
+      app:layout_constraintTop_toTopOf="@+id/register_again_password"
+      app:layout_constraintVertical_bias="0.5"
+      app:srcCompat="@android:drawable/ic_delete"
+      tools:ignore="MissingConstraints" />
+
+  <TextView
+      android:id="@+id/username_wrong"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="80dp"
+      android:layout_marginBottom="4dp"
+      android:text=""
+      android:textColor="#FF0000"
+      app:layout_constraintBottom_toTopOf="@+id/register_username"
+      app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,9 @@
     <string name="prompt_again_password">Password Again</string>
     <string name="prompt_phone">Phone</string>
     <string name="register_button">Register</string>
+    <string name="invalid_prompt">X Icon</string>
+    <string name="username_less_than_3">Username is less than 3</string>
+    <string name="username_greater_than_12">Username is greater than 12</string>
     <!--    <string name="title_activity_login">LoginActivity</string>-->
     <!--    <string name="prompt_email">Email</string>-->
     <!--    <string name="prompt_password">Password</string>-->

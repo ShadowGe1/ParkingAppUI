@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,7 +26,14 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText password;
     private EditText againPassword;
     private Button register;
-    private ImageView x_icon;
+    private ImageView xIconUsername;
+    private ImageView xIconName;
+    private ImageView xIconSurname;
+    private ImageView xIconEmail;
+    private ImageView xIconPhone;
+    private ImageView xIconPassword;
+    private ImageView xIconAgainPassword;
+    private TextView usernameWrong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,34 +53,54 @@ public class SignUpActivity extends AppCompatActivity {
         password = findViewById(R.id.register_password);
         againPassword = findViewById(R.id.register_again_password);
         register = findViewById(R.id.register_button);
-        x_icon = findViewById(R.id.x_icon);
+        xIconUsername = findViewById(R.id.x_icon_username);
+        xIconName = findViewById(R.id.x_icon_name);
+        xIconSurname = findViewById(R.id.x_icon_surname);
+        xIconEmail = findViewById(R.id.x_icon_email);
+        xIconPhone = findViewById(R.id.x_icon_phone);
+        xIconPassword = findViewById(R.id.x_icon_password);
+        xIconAgainPassword = findViewById(R.id.x_icon_againPassword);
+        usernameWrong = findViewById(R.id.username_wrong);
 
         register.setOnClickListener(v -> {
-            if(!EmailParser.isEmailValid(email.getText().toString())) {
-                showErrorIcon(email);
+            String username = this.username.getText().toString();
+            String name = this.name.getText().toString();
+            String surname = this.surname.getText().toString();
+            String email = this.email.getText().toString();
+            String phone = this.phone.getText().toString();
+            String password = this.password.getText().toString();
+            String againPassword = this.againPassword.getText().toString();
+
+            if(username.isEmpty()) {
+                xIconUsername.setVisibility(View.VISIBLE);
+            } else if(username.length() < 3) {
+                xIconUsername.setVisibility(View.VISIBLE);
+                usernameWrong.setText(R.string.username_less_than_3);
+            } else if(username.length() > 12) {
+                xIconUsername.setVisibility(View.VISIBLE);
+                usernameWrong.setText(R.string.username_greater_than_12);
             } else {
-                hideErrorIcon(email);
+                xIconUsername.setVisibility(View.GONE);
+                usernameWrong.setText("");
+            }
+
+            if(name.isEmpty()) {
+                xIconName.setVisibility(View.VISIBLE);
+            } else {
+                xIconName.setVisibility(View.GONE);
+            }
+
+            if(surname.isEmpty()) {
+                xIconSurname.setVisibility(View.VISIBLE);
+            } else {
+                xIconSurname.setVisibility(View.GONE);
+            }
+
+            if(!EmailParser.isEmailValid(email)) {
+                xIconEmail.setVisibility(View.VISIBLE);
+            } else {
+                xIconEmail.setVisibility(View.GONE);
             }
         });
     }
-
-    private void showErrorIcon(View nearView) {
-        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) x_icon.getLayoutParams();
-        params.startToEnd = nearView.getId(); // Poziționează iconița lângă câmp
-        params.topToTop = nearView.getId();  // Aliniază vertical
-        x_icon.setLayoutParams(params);
-
-        x_icon.setVisibility(View.VISIBLE); // Afișează iconița
-    }
-
-    // Metodă pentru a ascunde iconița de eroare
-    private void hideErrorIcon(View nearView) {
-        if (x_icon.getVisibility() == View.VISIBLE) {
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) x_icon.getLayoutParams();
-            if (params.startToEnd == nearView.getId()) {
-                x_icon.setVisibility(View.GONE); // Ascunde iconița
-            }
-        }
-    }
-
 }
