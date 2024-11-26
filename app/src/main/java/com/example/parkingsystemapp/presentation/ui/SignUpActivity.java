@@ -14,8 +14,12 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.example.parkingsystemapp.R;
 import com.example.parkingsystemapp.data.parser.EmailParser;
+import com.example.parkingsystemapp.data.parser.PhoneParser;
+import com.example.parkingsystemapp.data.remote.SignUpClient;
+import com.example.parkingsystemapp.data.repository.RegisterRepository;
 
 public class SignUpActivity extends AppCompatActivity {
     private EditText username;
@@ -25,7 +29,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText phone;
     private EditText password;
     private EditText againPassword;
-    private Button register;
     private ImageView xIconUsername;
     private ImageView xIconName;
     private ImageView xIconSurname;
@@ -34,6 +37,8 @@ public class SignUpActivity extends AppCompatActivity {
     private ImageView xIconPassword;
     private ImageView xIconAgainPassword;
     private TextView usernameWrong;
+    private TextView passwordWrong;
+    private TextView againPasswordWrong;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         username = findViewById(R.id.register_username);
         name = findViewById(R.id.register_name);
         surname = findViewById(R.id.register_surname);
@@ -52,7 +58,7 @@ public class SignUpActivity extends AppCompatActivity {
         phone = findViewById(R.id.register_phone);
         password = findViewById(R.id.register_password);
         againPassword = findViewById(R.id.register_again_password);
-        register = findViewById(R.id.register_button);
+        Button register = findViewById(R.id.register_button);
         xIconUsername = findViewById(R.id.x_icon_username);
         xIconName = findViewById(R.id.x_icon_name);
         xIconSurname = findViewById(R.id.x_icon_surname);
@@ -63,6 +69,8 @@ public class SignUpActivity extends AppCompatActivity {
         usernameWrong = findViewById(R.id.username_wrong);
 
         register.setOnClickListener(v -> {
+            boolean isOk = true;
+
             String username = this.username.getText().toString();
             String name = this.name.getText().toString();
             String surname = this.surname.getText().toString();
@@ -71,35 +79,75 @@ public class SignUpActivity extends AppCompatActivity {
             String password = this.password.getText().toString();
             String againPassword = this.againPassword.getText().toString();
 
-            if(username.isEmpty()) {
+            if (username.isEmpty()) {
                 xIconUsername.setVisibility(View.VISIBLE);
-            } else if(username.length() < 3) {
+                isOk = false;
+            } else if (username.length() < 3) {
                 xIconUsername.setVisibility(View.VISIBLE);
                 usernameWrong.setText(R.string.username_less_than_3);
-            } else if(username.length() > 12) {
+                isOk = false;
+            } else if (username.length() > 12) {
                 xIconUsername.setVisibility(View.VISIBLE);
                 usernameWrong.setText(R.string.username_greater_than_12);
+                isOk = false;
             } else {
                 xIconUsername.setVisibility(View.GONE);
                 usernameWrong.setText("");
             }
 
-            if(name.isEmpty()) {
+            if (name.isEmpty()) {
                 xIconName.setVisibility(View.VISIBLE);
+                isOk = false;
             } else {
                 xIconName.setVisibility(View.GONE);
             }
 
-            if(surname.isEmpty()) {
+            if (surname.isEmpty()) {
                 xIconSurname.setVisibility(View.VISIBLE);
+                isOk = false;
             } else {
                 xIconSurname.setVisibility(View.GONE);
             }
 
-            if(!EmailParser.isEmailValid(email)) {
+            if (!EmailParser.isEmailValid(email)) {
                 xIconEmail.setVisibility(View.VISIBLE);
+                isOk = false;
             } else {
                 xIconEmail.setVisibility(View.GONE);
+            }
+
+            if (!PhoneParser.isPhoneValid(phone)) {
+                xIconPhone.setVisibility(View.VISIBLE);
+                isOk = false;
+            } else {
+                xIconPhone.setVisibility(View.GONE);
+            }
+
+            if (password.isEmpty()) {
+                xIconPassword.setVisibility(View.VISIBLE);
+                isOk = false;
+            } else if (password.length() < 8) {
+                passwordWrong.setText(R.string.the_password_has_less_than_8_symbols);
+                xIconPassword.setVisibility(View.VISIBLE);
+                isOk = false;
+            } else {
+                xIconPassword.setVisibility(View.GONE);
+                passwordWrong.setText("");
+            }
+
+            if (!password.equals(againPassword)) {
+                againPasswordWrong.setText(R.string.not_equals_passwords);
+                xIconAgainPassword.setVisibility(View.VISIBLE);
+                isOk = false;
+            } else {
+                xIconAgainPassword.setVisibility(View.GONE);
+                againPasswordWrong.setText("");
+            }
+
+            if(isOk) {
+                RegisterRepository registerRepository = new RegisterRepository();
+                SignUpClient signUpClient = new SignUpClient(username, name, surname, email, phone.replace("0", "+373"), password, againPassword, registerRepository);
+                signUpClient.execute(((success, message, errorCode) -> againPasswordWrong.setText(message)));
             }
         });
     }
