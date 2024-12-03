@@ -18,6 +18,7 @@
     <string name="username_less_than_3">Username is less than 3</string>
     <string name="username_greater_than_12">Username is greater than 12</string>
     <string name="not_equals_passwords">The passwords are not equal</string>
+    <string name="logout">Logout</string>
     <!--    <string name="title_activity_login">LoginActivity</string>-->
     <!--    <string name="prompt_email">Email</string>-->
     <!--    <string name="prompt_password">Password</string>-->

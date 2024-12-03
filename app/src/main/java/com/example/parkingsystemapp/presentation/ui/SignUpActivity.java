@@ -67,6 +67,8 @@ public class SignUpActivity extends AppCompatActivity {
         xIconPassword = findViewById(R.id.x_icon_password);
         xIconAgainPassword = findViewById(R.id.x_icon_againPassword);
         usernameWrong = findViewById(R.id.username_wrong);
+        passwordWrong = findViewById(R.id.password_wrong);
+        againPasswordWrong = findViewById(R.id.again_password_wrong);
 
         register.setOnClickListener(v -> {
             boolean isOk = true;
@@ -146,7 +148,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             if(isOk) {
                 RegisterRepository registerRepository = new RegisterRepository();
-                SignUpClient signUpClient = new SignUpClient(username, name, surname, email, phone.replace("0", "+373"), password, againPassword, registerRepository);
+                SignUpClient signUpClient = new SignUpClient(username, name, surname, email, phone.replaceFirst("^0", "+373"), password, againPassword, registerRepository);
                 signUpClient.execute(((success, message, errorCode) -> againPasswordWrong.setText(message)));
             }
         });
