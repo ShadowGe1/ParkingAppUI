@@ -49,7 +49,17 @@ dependencies {
     implementation libs.retrofit
     implementation libs.converter.gson
     implementation libs.osmdroid.android
+    implementation libs.play.services.basement
 
+
+//    implementation fileTree(dir: 'libs', include: ['*.jar'])
+//    implementation libs.appcompat.v7
+//    testImplementation libs.junit.v412
+//    androidTestImplementation libs.runner
+//    androidTestImplementation libs.androidx.espresso.core
+
+    //for circular image
+    implementation libs.circleimageview
 
 
 

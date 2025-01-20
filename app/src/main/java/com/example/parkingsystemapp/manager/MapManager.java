@@ -2,8 +2,14 @@ package com.example.parkingsystemapp.manager;
 
 import static org.osmdroid.tileprovider.tilesource.TileSourceFactory.MAPNIK;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.widget.Toast;
+
+import com.example.parkingsystemapp.R;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.util.GeoPoint;
@@ -35,6 +41,11 @@ public class MapManager {
         marker.setPosition(new GeoPoint(latitude, longitude));
         marker.setTitle(title);
 
+        @SuppressLint("UseCompatLoadingForDrawables")
+        Drawable parkMarker = context.getDrawable(R.drawable.parking_marker3);
+
+        marker.setIcon(parkMarker);
+
         marker.setOnMarkerClickListener((m, map) -> {
             Toast.makeText(context,
                     "Marker apasat" + m.getTitle() + " " + m.getPosition(),
@@ -46,10 +57,20 @@ public class MapManager {
     }
 
     public void onPause() {
-        mapView.onPause();
+        if(mapView != null) {
+            mapView.onPause();
+        }
     }
 
     public void onResume() {
-        mapView.onResume();
+        if(mapView != null) {
+            mapView.onResume();
+        }
+    }
+
+    public void onDestroy() {
+        if(mapView != null) {
+            mapView.onDetach();
+        }
     }
 }

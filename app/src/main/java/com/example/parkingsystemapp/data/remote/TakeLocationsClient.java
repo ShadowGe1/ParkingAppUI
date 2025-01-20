@@ -41,13 +41,22 @@ public class TakeLocationsClient {
                         .addHeader("Accept", "application/json")
                         .build();
 
-                response = client.newCall(request).execute();
-                if (!response.isSuccessful()) {
+                for(int i = 0; i < 10; i++) {
+
+                    response = client.newCall(request).execute();
+
+                    if (!response.isSuccessful()) {
+                        Thread.sleep(1000);
+                    } else {
+                        break;
+                    }
+                }
+
+                if(!response.isSuccessful()) {
                     Log.e(TAG, "Request failed: " + response.code());
                     new Handler(Looper.getMainLooper()).post(() -> callback.onResponse(null));
                     return;
                 }
-
 
                 String responseBody = response.body() != null ? response.body().string() : null;
                 if (responseBody != null) {
@@ -56,12 +65,13 @@ public class TakeLocationsClient {
                     LocationsManager locationsManager = new LocationsManager();
                     List<CoordinatePlacer> coordinates = locationsManager.jsonExtractionCoordinate(jsonResponse);
 
-                    // Transmite JSON-ul obținut prin callback
                     new Handler(Looper.getMainLooper()).post(() -> callback.onResponse(coordinates));
                 }
             } catch (IOException | JSONException e) {
                 Log.e(TAG, "Error during request", e);
                 new Handler(Looper.getMainLooper()).post(() -> callback.onResponse(null));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             } finally {
                 if (response != null) {
                     response.close();
